@@ -1,8 +1,101 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #FFFAF9;
+}
+.body{
+  position: relative;
+}
+.icon {
+  width: 2em; height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  margin-right: 5px;
+}
+.inform-box{
+  position: absolute;
+  left: 150px;
+  top:60px;
+  width: 350px;
+  height: 400px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px 0 rgba(237,219,195,.5);
+  border-radius: 6px 6px 16px 16px;
+
+}
+.inform-box .web-name{
+  margin: 10px 15px;
+  border-bottom: 1px solid #e7e5e5 ;
+}
+.inform-box .web-name .title{
+  margin-left: 80px;
+  font-size: 20px;
+}
+.inform-box .web-name .link{
+  text-align: center;
+}
+.inform-box .web-name .input{
+  text-align: center;
+  margin: 10px 0;
+}
+.inform-box .web-name .input .artNum{
+  border: none;
+  width: 100px;
+  outline:none;
+  text-align: center;
+  font-size: 16px;
+}
+.confirm .button{
+  width: 270px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 40px auto 0;
+  background-color: rgb(74, 143, 158);
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  line-height: 40px;
+}
+.showDB{
+  cursor: pointer;
 }
 
-a {
-  color: #00B7FF;
+.detail{
+  position: absolute;
+  left: 600px;
+  top:60px;
+  width: 500px;
+  height: 400px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px 0 rgba(237,219,195,.5);
+  border-radius: 6px 6px 16px 16px;
+}
+
+.detail .detail-box{
+  margin: 10px 20px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #e7e5e5 ;
+}
+
+.detail-db{
+  position: absolute;
+  left: 150px;
+  top: 560px;
+  width: 950px;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 0 6px 20px 0 rgba(237,219,195,.5);
+  border-radius: 6px 6px 16px 16px;
+  margin-bottom: 80px;
+}
+.db-box{
+  margin: 10px 20px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #e7e5e5 ;
+}
+.db-box span{
+  margin: 0 40px;
 }

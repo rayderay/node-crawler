@@ -1,11 +1,169 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Ray的小爬虫</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/fontstyle/iconfont.css' />
+    <script src="/stylesheets/fontstyle/iconfont.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+    
   </head>
+  
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="body">
+        <div class="inform-box">
+          <div class="web-name">
+            <div class="title">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-stars"></use>
+                  </svg>
+                  <span > 爬虫对象：</span>
+            </div>  
+            <p class="link"> 博客园：https://www.cnblogs.com/</p>
+          </div>
+          <div class="web-name" style="margin-top:20px;">
+              <div class="title">
+                  <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-cheesemoon"></use>
+                    </svg>
+                    <span > 爬取文章数：</span>
+              </div> 
+              <div class="input">
+                <input type="input" class="artNum">
+              </div>
+          </div>
+          <div class="confirm" style="margin-top:20px;">
+              <svg class="icon" aria-hidden="true" style="margin-left:160px">
+                  <use xlink:href="#icon-planetsmovement"></use>
+              </svg>
+              <div class="button">
+                开始爬虫！
+              </div>
+              <p class="showDB" style="text-align:center;">需要展示MongoDB里的数据么？点这里！</p>
+          </div>
+        </div>
+
+        <div class="detail">
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-spaceship"></use>
+                </svg>
+                <span> 爬虫开始时间：</span>
+                <span class="startDate"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fallingstar"></use>
+                </svg>
+                <span > 爬虫结束时间：</span>
+                <span class="endDate"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-electricitymeasure"></use>
+                </svg>
+                <span> 耗时：</span>
+                <span class="costTime"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-saturnplanets"></use>
+                </svg>
+                <span> 爬虫遍历的文章数目：</span>
+                <span class="pageNum"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-moonrevolution"></use>
+                </svg>
+                <span> 作者人数：</span>
+                <span class="len"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-atom"></use>
+                </svg>
+                <span > 作者入园平均天数：</span>
+                <span class="aveAge"></span>
+          </div>
+
+          <div class="detail-box">
+              <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-planetarysystem"></use>
+                </svg>
+                <span > 作者人均粉丝数：</span>
+                <span class="aveFans"></span>
+          </div>
+
+
+
+        </div>
+
+        <div class="detail-db">
+
+        </div>
+    </div>
+    
   </body>
+
+<script>
+  $('.button').click(function(){
+
+    if($('.artNum').val()== ''){
+      alert('爬取文章数不能为空！')
+      return false;
+    }
+     
+    var artNum = $('.artNum').val();
+
+    $.ajax({
+      url:'/crawler/getCrawler',
+      type: 'post',
+      data: {pageNum : artNum/20},
+      success:function(json){
+        var data = json.data;
+        alert('爬完啦！');
+        $('.startDate').html(data.startDate);
+        $('.endDate').html(data.endDate);
+        $('.len').html(data.len);
+        $('.costTime').html(data.costTime);
+        $('.aveAge').html(data.joinData);
+        $('.pageNum').html(data.pageNum);
+        $('.aveFans').html(data.aveFans);
+      }
+
+    })
+
+
+  });
+
+  $('.showDB').click(function(){
+    $.ajax({
+      url:'/crawler/dbList',
+      type: 'get',
+      success:function(json){
+        var spanIndex = ''
+        for( var i = 0 ; i < json.length; i++){
+          var datanow = json[i];
+          spanIndex += '<div class="db-box"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-skull"></use></svg>'+
+            '<span>姓名: '+datanow.name+'</span>'+
+            '<span>入园时间: '+datanow.joinData+'</span>'+
+            '<span>粉丝人数: '+datanow.fans+'</span>'+
+            '<span>关注人数: '+datanow.focus+'</span>'+'</div>';
+
+        };
+        $('.detail-db').html(spanIndex);
+      
+      
+      }
+
+    })
+  })
+</script>
 </html>

@@ -4,11 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var app = express();
+/**
+ * mongoDB的注册
+ * 这个坑踩过两次了
+ * 一定要在使用schema的路径被引用前进行注册
+ */
+var mongoose = require('./mongoose');
+var db = mongoose();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var crawler = require('./routes/crawler');
 
-var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +32,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/crawler', crawler);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
